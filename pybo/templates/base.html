@@ -1,0 +1,19 @@
+<!--html을 표준 html로 상속해주는 파일-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no">
+    <title>Hello pybo</title>
+    <!--BootStrap CSS-->
+    <link rel="stylesheet" href="{{url_for('static',filename='bootstrap.min.css')}}">
+    <!--pybo CSS -->
+    <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+</head>
+<body>
+    <!--기본 템플릿에 삽입할 내용 Start-->
+    {% block content %}
+    {%endblock%}
+    <!--기본 템플릿에 삽입할 내용 End-->
+</body>
+</html>
