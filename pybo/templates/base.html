@@ -11,9 +11,15 @@
     <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
 </head>
 <body>
+    <!--네비게이션 바 적용-->
+    {% include 'navbar.html' %}
     <!--기본 템플릿에 삽입할 내용 Start-->
     {% block content %}
     {%endblock%}
     <!--기본 템플릿에 삽입할 내용 End-->
+    <!--jQuery JS-->
+    <script src="{{url_for('static',filename='jquery-3.7.1.min.js')}}"></script>
+    <!--Bootstrap JS-->
+    <script src="{{url_for('static',filename='bootstrap.min.js')}}"></script>
 </body>
 </html>

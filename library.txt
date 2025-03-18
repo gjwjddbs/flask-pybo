@@ -1,1 +1,4 @@
 Flask-WFT : Flask 어플리케이션에서 웹 form 처리를 간편하게 해주는 라이브러리
+SQLAlchemy : SQL문을 직접 작성하지 않고도 python 객체로 데이터 베이스를 조작할 수 있는 라이브러리
+FlaskForm : Flask-WTF 라이브러리에서 제공하는 클래스, 웹 어플리케이션에서 HTML 폼을 만들고, 데이터 유효성 검사를 실행
+flask-migrate : 데이터베이스 변경 사항을 관리하는 라이브러리
