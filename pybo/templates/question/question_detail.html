@@ -11,8 +11,11 @@
                 {{question.content}}
             </div>
             <div clas="d-flex justify-content-end">
-                <div class="badge badge-light p-2">
-                    {{question.create_date|datetime}}
+                <div class="badge badge-light p-2 text-left">
+                    <!--질문 등록자 표시-->
+                    <div class="mb-2">{{question.user.username}}</div>
+                    <!--질문 등록일자 표시-->
+                    <div>{{question.create_date|datetime}}</div>
                 </div>
             </div>
         </div>
@@ -27,8 +30,11 @@
                 {{answer.content}}
             </div>
             <div class= "d-flex justify-content-end">
-                <div class="badge badge-light p-2">
-                    {{answer.create_date|datetime}}
+                <div class="badge badge-light p-2 text-left">
+                    <!--답변 등록자 표시-->
+                    <div class="mb-2">{{answer.user.username}}</div>
+                    <!--답변 등록일자 표시-->
+                    <div>{{answer.create_date|datetime}}</div>
                 </div>
             </div>
         </div>
@@ -44,7 +50,8 @@
         {%endfor%}
         <!--오류 표시 끝-->
         <div class="form-group">
-            <textarea name="content" id="content" class="form-control" rows="10"></textarea>
+            <!--로그아웃 상태에서 답변 등록 비활성화-->
+            <textarea {% if not g.user %} disabled {% endif %} name="content" id="content" class="form-control" rows="10"></textarea>
         </div>
         <input type="submit" value="답변등록" class="btn btn-primary">
     </form>

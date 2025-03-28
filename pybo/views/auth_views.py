@@ -1,3 +1,4 @@
+import functools
 from flask import Blueprint, url_for, render_template, flash, request, session, g
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import redirect
@@ -55,3 +56,11 @@ def load_logged_in_user():
 def logout():
     session.clear()
     return redirect(url_for('main.index'))
+
+def login_required(view):
+    @functools.wraps(view) #functools.wraps는 데코레이터를 정의할 때 원래 함수의 메타데이터를 유지하기 위해 사용
+    def wrapped_view(**kwargs):
+        if g.user is None:
+            return redirect(url_for('auth.login'))
+        return view(**kwargs)
+    return wrapped_view
