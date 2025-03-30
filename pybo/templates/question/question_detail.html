@@ -11,6 +11,13 @@
                 {{question.content}}
             </div>
             <div clas="d-flex justify-content-end">
+                <!--질문 수정일자 표시-->
+                {%if question.modify_date %}
+                <div class="badge badge-light p-2 text-left mx-3">
+                    <div class="mb-2">modified at</div>
+                    <div>{{question.modify_date|datetime}}</div>
+                </div>
+                {%endif%}
                 <div class="badge badge-light p-2 text-left">
                     <!--질문 등록자 표시-->
                     <div class="mb-2">{{question.user.username}}</div>
@@ -18,6 +25,15 @@
                     <div>{{question.create_date|datetime}}</div>
                 </div>
             </div>
+            <!--질문 수정,삭제 버튼-->
+            {% if g.user == question.user %}
+            <div class="my-3">
+                <!--질문 수정-->
+                <a href="{{url_for('question.modify',question_id=question.id)}}" class="btn btn-sm btn-outline-secondary">수정</a>
+                <!--질문 삭제-->
+                <a href="#" class="delete btn btn-sm btn-outline-secondary" data-uri="{{url_for('question.delete',question_id=question.id)}}">삭제</a>
+            </div>
+            {% endif %} 
         </div>
     </div>
     <h5 class="border-bottom my-3 py-2">
@@ -30,6 +46,13 @@
                 {{answer.content}}
             </div>
             <div class= "d-flex justify-content-end">
+                <!--답변 수정일자 표시-->
+                {%if answer.modify_date %}
+                <div class="badge badge-light p-2 text-left mx-3">
+                    <div class="mb-2">modified at</div>
+                    <div>{{answer.modify_date|datetime}}</div>
+                </div>
+                {%endif%}
                 <div class="badge badge-light p-2 text-left">
                     <!--답변 등록자 표시-->
                     <div class="mb-2">{{answer.user.username}}</div>
@@ -37,6 +60,15 @@
                     <div>{{answer.create_date|datetime}}</div>
                 </div>
             </div>
+            <!--질문 답변 수정,삭제 버튼-->
+            {%if g.user == answer.user %}
+            <div class="my-3">
+                <!--답변 수정-->
+                <a href="{{url_for('answer.modify',answer_id=answer.id)}}" class="btn btn-sm btn-outline-secondary">수정</a>
+                <!--답변 삭제-->
+                <a href="#" class="delete btn btn-sm btn-outline-secondary" data-uri="{{url_for('answer.delete',answer_id=answer.id)}}">삭제</a>
+            </div>
+            {%endif%}            
         </div>
     </div>
     {% endfor %}
@@ -56,4 +88,16 @@
         <input type="submit" value="답변등록" class="btn btn-primary">
     </form>
 </div> 
+{%endblock%}
+{%block script%}
+<script type="text/javascript">
+$(document).ready(function(){
+    //삭제 버튼 클릭 시 확인 메세지 출력
+    $(".delete").on('click',function(){
+        if(confirm("정말로 삭제하시겠습니까?")){
+            location.href=$(this).data("uri")
+        }
+    });
+});
+</script>
 {%endblock%}
