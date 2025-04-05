@@ -81,60 +81,72 @@
         {{question.answer_set|length}}개의 답변이 있습니다.
     </h5>
     {% for answer in question.answer_set %}
-    <div class="card my-3">
-        <div class="card-body">
-            <div class="card-text" style="white-space: pre-line;">
-                {{answer.content}}
+    <div class="row my-3">
+        <div class="col-1"><!--답변 추천 영역-->
+            <div class="bg-light text-center p-3 border font-weight-bolder mb-1">
+                {{answer.voter|length}}
             </div>
-            <div class= "d-flex justify-content-end">
-                <!--답변 수정일자 표시-->
-                {%if answer.modify_date %}
-                <div class="badge badge-light p-2 text-left mx-3">
-                    <div class="mb-2">modified at</div>
-                    <div>{{answer.modify_date|datetime}}</div>
-                </div>
-                {%endif%}
-                <div class="badge badge-light p-2 text-left">
-                    <!--답변 등록자 표시-->
-                    <div class="mb-2">{{answer.user.username}}</div>
-                    <!--답변 등록일자 표시-->
-                    <div>{{answer.create_date|datetime}}</div>
-                </div>
-            </div>
-            <!--질문 답변 수정,삭제 버튼-->
-            {%if g.user == answer.user %}
-            <div class="my-3">
-                <!--답변 수정-->
-                <a href="{{url_for('answer.modify',answer_id=answer.id)}}" class="btn btn-sm btn-outline-secondary">수정</a>
-                <!--답변 삭제-->
-                <a href="#" class="delete btn btn-sm btn-outline-secondary" data-uri="{{url_for('answer.delete',answer_id=answer.id)}}">삭제</a>
-            </div>
-            {%endif%}
-            <!--답변 댓글 등록-->     
-                {%if answer.comment_set|length > 0 %}
-                <div class="mt-3">
-                    {%for comment in answer.comment_set%}
-                        <div class="comment py-2 text-muted">
-                            <span class="white-space: pre-line;">
-                                {{comment.content}}
-                            </span>
-                            <span>
-                                - {{comment.user.username}}, {{comment.create_date|datetime}}
-                                {%if comment.modify_date%}
-                                (수정:{{comment.modify_date|datetime}})
-                                {%endif%}
-                            </span>
-                            {%if g.user==comment.user%}
-                            <a href="{{url_for('comment.modify_answer',comment_id=comment.id)}}" class="small">수정</a>
-                            <a href="#" class="small delete" data-uri="{{url_for('comment.delete_answer',comment_id=comment.id)}}">삭제</a>
-                            {%endif%}
+            <a href="#" data-uri="{{url_for('vote.answer',answer_id=answer.id)}}" class="recommend btn btn-secondary btn-block my-1">
+                추천
+            </a>
+        </div>
+        <div class="col-11"><!--답변 영역-->
+            <div class="card my-3">
+                <div class="card-body">
+                    <div class="card-text" style="white-space: pre-line;">
+                        {{answer.content}}
+                    </div>
+                    <div class= "d-flex justify-content-end">
+                        <!--답변 수정일자 표시-->
+                        {%if answer.modify_date %}
+                        <div class="badge badge-light p-2 text-left mx-3">
+                            <div class="mb-2">modified at</div>
+                            <div>{{answer.modify_date|datetime}}</div>
                         </div>
-                {%endfor%}
+                        {%endif%}
+                        <div class="badge badge-light p-2 text-left">
+                            <!--답변 등록자 표시-->
+                            <div class="mb-2">{{answer.user.username}}</div>
+                            <!--답변 등록일자 표시-->
+                            <div>{{answer.create_date|datetime}}</div>
+                        </div>
+                    </div>
+                    <!--질문 답변 수정,삭제 버튼-->
+                    {%if g.user == answer.user %}
+                    <div class="my-3">
+                        <!--답변 수정-->
+                        <a href="{{url_for('answer.modify',answer_id=answer.id)}}" class="btn btn-sm btn-outline-secondary">수정</a>
+                        <!--답변 삭제-->
+                        <a href="#" class="delete btn btn-sm btn-outline-secondary" data-uri="{{url_for('answer.delete',answer_id=answer.id)}}">삭제</a>
+                    </div>
+                    {%endif%}
+                    <!--답변 댓글 등록-->     
+                        {%if answer.comment_set|length > 0 %}
+                        <div class="mt-3">
+                            {%for comment in answer.comment_set%}
+                                <div class="comment py-2 text-muted">
+                                    <span class="white-space: pre-line;">
+                                        {{comment.content}}
+                                    </span>
+                                    <span>
+                                        - {{comment.user.username}}, {{comment.create_date|datetime}}
+                                        {%if comment.modify_date%}
+                                        (수정:{{comment.modify_date|datetime}})
+                                        {%endif%}
+                                    </span>
+                                    {%if g.user==comment.user%}
+                                    <a href="{{url_for('comment.modify_answer',comment_id=comment.id)}}" class="small">수정</a>
+                                    <a href="#" class="small delete" data-uri="{{url_for('comment.delete_answer',comment_id=comment.id)}}">삭제</a>
+                                    {%endif%}
+                                </div>
+                        {%endfor%}
+                        </div>
+                        {%endif%}
+                        <div>
+                            <a href="{{url_for('comment.create_answer',answer_id=answer.id)}}" class="small"><small>댓글 추가 ..</small></a>
+                        </div>
                 </div>
-                {%endif%}
-                <div>
-                    <a href="{{url_for('comment.create_answer',answer_id=answer.id)}}" class="small"><small>댓글 추가 ..</small></a>
-                </div>
+            </div>
         </div>
     </div>
     {% endfor %}
