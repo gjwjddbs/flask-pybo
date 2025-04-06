@@ -28,6 +28,7 @@ def detail(question_id):
     question = Question.query.get_or_404(question_id)
     return render_template('question/question_detail.html',question=question,form=form)
 
+#질문 등록 함수
 @bp.route('/create/', methods=('GET','POST'))
 @login_required #로그인 애너테이션 적용, 로그인 여부 확인
 def create():
@@ -39,7 +40,7 @@ def create():
         return redirect(url_for('main.index')) #POST 방식이면 데이터 저장, 데이터 저장이 완료되면 main.index로 리다이렉트
     return render_template('question/question_form.html',form=form) # GET 방식으면 질문 등록 페이지 렌더링
 
-#질문 수정
+#질문 수정 함수
 @bp.route('/modify/<int:question_id>',methods=('GET','POST'))
 @login_required #질문 수정 시 로그인 여부 확인
 def modify(question_id):
@@ -58,7 +59,7 @@ def modify(question_id):
         form = QuestionForm(obj=question)# 데이터베이스에서 조회한 질문 객체를 obj로 설정하여 폼에 초기값을 설정
     return render_template('question/question_form.html',form=form) #GET 방식이면 질문 수정 페이지 렌더링
 
-#질문 삭제
+#질문 삭제 함수
 @bp.route('/delete/<int:question_id>')
 @login_required #질문 삭제 시 로그인 여부 확인
 def delete(question_id):

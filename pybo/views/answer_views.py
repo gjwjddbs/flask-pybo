@@ -15,7 +15,7 @@ from .auth_views import login_required # 로그인 데코레이터를 사용하�
 #answer_views.py 파일이 answer라는 이름의 블루프린트 파일임을 나타냄
 bp = Blueprint('answer',__name__,url_prefix='/answer')
 
-
+#답변 등록 함수
 @bp.route('/create/<int:question_id>',methods=('POST',))
 #답변 저장 템플릿에 있는 form 태그의 action 속성에 해당하는 URL을 나타낸다
 @login_required #로그인 애너테이션 적용
@@ -29,10 +29,10 @@ def create(question_id):
         answer = Answer(content=content, create_date=datetime.now(), user=g.user)
         question.answer_set.append(answer)
         db.session.commit()
-        return redirect(url_for('question.detail',question_id=question_id))
+        return redirect('{}#answer_{}'.format(url_for('question.detail',question_id=question_id),answer.id))
     return render_template('question/question_detail.html',question=question,form=form)
 
-#답변 수정
+#답변 수정 함수
 @bp.route('/modify/<int:answer_id>',methods=('GET','POST'))
 @login_required #답변 수정 시 로그인 여부 확인
 def modify(answer_id):
@@ -46,12 +46,12 @@ def modify(answer_id):
             form.populate_obj(answer)
             answer.modify_date = datetime.now()
             db.session.commit()
-            return redirect(url_for('question.detail',question_id = answer.question.id))
+            return redirect('{}#answer_{}'.format(url_for('question.detail',question_id = answer.question.id),answer.id))
     else:
         form = AnswerForm(obj=answer) #데이터베이스에서 조회한 답변 객체를 obj로 설정하여 폼에 초기값을 설정
     return render_template('answer/answer_form.html',answer=answer,form=form) #GET 방식이면 답변 수정 페이지 렌더링
 
-#답변 삭제
+#답변 삭제 함수
 @bp.route('/delete/<int:answer_id>')
 @login_required #답변 삭제 시 로그인 여부 확인
 def delete(answer_id):

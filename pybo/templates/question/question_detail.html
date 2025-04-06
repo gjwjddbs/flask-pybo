@@ -55,6 +55,7 @@
                     {% if question.comment_set|length > 0 %}
                     <div class="mt-3">
                     {%for comment in question.comment_set %}
+                        <a name="comment_{{comment.id}}"></a>
                         <div class="comment py-2 text-muted">
                             <span style="white-space: pre-line;">{{comment.content}}</span>
                             <span> - {{comment.user.username}}, {{comment.create_date|datetime}}
@@ -81,6 +82,7 @@
         {{question.answer_set|length}}개의 답변이 있습니다.
     </h5>
     {% for answer in question.answer_set %}
+    <a name="answer_{{answer.id}}"></a>
     <div class="row my-3">
         <div class="col-1"><!--답변 추천 영역-->
             <div class="bg-light text-center p-3 border font-weight-bolder mb-1">
@@ -124,6 +126,7 @@
                         {%if answer.comment_set|length > 0 %}
                         <div class="mt-3">
                             {%for comment in answer.comment_set%}
+                                <a name="comment_{{comment.id}}"></a>
                                 <div class="comment py-2 text-muted">
                                     <span class="white-space: pre-line;">
                                         {{comment.content}}
@@ -176,7 +179,7 @@ $(document).ready(function(){
             location.href=$(this).data("uri")
         }
     });
-    //추천 버튼 클릭 시 확인 메세지 추력
+    //추천 버튼 클릭 시 확인 메세지 출력
     $(".recommend").on('click',function(){
         if(confirm("추천하시겠습니까?")){
             location.href=$(this).data("uri");
