@@ -24,8 +24,9 @@
         <div class="col-11"><!--질문 영역 : col-11 클래스를 사용하여 질문 영역의 너비 크기를 11/12로 적용-->
             <div class="card">
                 <div class="card-body">
-                    <div class="card-text" style="white-space: pre-line;">
-                        {{question.content}}
+                    <div class="card-text">
+                        <!--질문에 마크다운 기능 적용-->
+                        {{question.content|markdown}}
                     </div>
                     <div clas="d-flex justify-content-end">
                         <!--질문 수정일자 표시-->
@@ -95,8 +96,9 @@
         <div class="col-11"><!--답변 영역-->
             <div class="card my-3">
                 <div class="card-body">
-                    <div class="card-text" style="white-space: pre-line;">
-                        {{answer.content}}
+                    <div class="card-text">
+                        <!--답변에 마크다운 기능 적용-->
+                        {{answer.content|markdown}}
                     </div>
                     <div class= "d-flex justify-content-end">
                         <!--답변 수정일자 표시-->
