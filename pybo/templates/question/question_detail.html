@@ -163,6 +163,7 @@
             <strong>{{form[field].label}}</strong>: {{', '.join(errors)}}
         </div> 
         {%endfor%}
+
         <!--오류 표시 끝-->
         <div class="form-group">
             <!--로그아웃 상태에서 답변 등록 비활성화-->
@@ -181,6 +182,7 @@ $(document).ready(function(){
             location.href=$(this).data("uri")
         }
     });
+
     //추천 버튼 클릭 시 확인 메세지 출력
     $(".recommend").on('click',function(){
         if(confirm("추천하시겠습니까?")){
