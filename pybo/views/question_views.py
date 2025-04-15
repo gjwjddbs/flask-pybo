@@ -8,19 +8,68 @@ from ..forms import QuestionForm, AnswerForm
 
 from werkzeug.utils import redirect
 
+from sqlalchemy import func 
+
 from ..import db
 
 from pybo.views.auth_views import login_required # 로그인 데코레이터를 사용하기 위해 import
+
+from ..models import Question, Answer, User, question_voter
 
 bp=Blueprint('question',__name__,url_prefix='/question')
 
 @bp.route('/list/')
 def _list():
-    #페이징 기능 추가
-    page=request.args.get('page',type=int,default=1) #페이지
-    question_list = Question.query.order_by(Question.create_date.desc())
-    question_list = question_list.paginate(page=page, per_page=10)
-    return render_template('question/question_list.html',question_list=question_list)
+    #입력 파라미터
+    page = request.args.get('page',type=int,default=1) #페이지
+    kw = request.args.get('kw',type=str,default='') #검색어
+    so = request.args.get('so',type=str,default='recent') #정렬기준
+
+    #정렬
+    if so == 'recommend': # 추천순으로 정렬
+        sub_query = db.session.query(
+            question_voter.c.question_id, func.count('*').label('num_voter')) \
+            .group_by(question_voter.c.question_id).subquery()
+        question_list = Question.query \
+            .outerjoin(sub_query,Question.id == sub_query.c.question_id) \
+            .order_by(sub_query.c.num_voter.desc(),Question.create_date.desc())
+        
+    elif so == 'popular' : #답변이 많은 질문 순으로 정렬
+        sub_query = db.session.query(
+            Answer.question_id, func.count('*').label('num_answer')) \
+                .group_by(Answer.question_id).subquery()
+        question_list = Question.query \
+            .outerjoin(sub_query, Question.id==sub_query.c.question_id) \
+            .order_by(sub_query.c.num_answer.desc(),Question.create_date.desc())
+    
+    else: #최근 등록된 질문 순으로 정렬
+        question_list = Question.query.order_by(Question.create_date.desc())
+        
+    #조회
+    if kw: #검색어가 있을 경우 질문 제목, 내용, 작성자, 답변 내용, 답변 작성자 항목에서 OR 조건으로 검색
+        search='%%{}%%'.format(kw) #검색어를 포함하는 질문을 찾기 위해 %%로 감싸줌
+
+        sub_query = db.session.query(
+            Answer.question_id, Answer.content, User.username).join(
+                User, Answer.user_id==User.id).subquery()
+        
+        question_list = question_list \
+            .join(User) \
+            .outerjoin(sub_query, sub_query.c.question_id == Question.id) \
+            .filter(
+                Question.subject.ilike(search) | # 제목
+                Question.content.ilike(search) | # 내용
+                User.username.ilike(search) | # 질문 작성자
+                sub_query.c.content.ilike(search) | #답변 내용
+                sub_query.c.username.ilike(search) #답변 작성자
+                ) \
+            .distinct() 
+        
+    # 페이징
+    question_list = question_list.paginate(page=page,per_page=10)
+    return render_template('question/question_list.html',
+                           question_list=question_list,page=page,kw=kw)
+
 
 @bp.route('/detail/<int:question_id>/')
 def detail(question_id):
