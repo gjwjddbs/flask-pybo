@@ -13,16 +13,16 @@
 ## 🔧 주요 기능
 
 > #### 게시판
- ![image](https://github.com/user-attachments/assets/b4554c12-85e3-4dfc-963c-c289c7cd869c)
+> ![image](https://github.com/user-attachments/assets/b4554c12-85e3-4dfc-963c-c289c7cd869c)
 
 <br>
 
 > #### 회원 가입  
-![image](https://github.com/user-attachments/assets/fc9911df-2e40-4192-852b-cc175d887b54)
+> ![image](https://github.com/user-attachments/assets/fc9911df-2e40-4192-852b-cc175d887b54)
 
   
 > #### 로그인/로그아웃
-![image](https://github.com/user-attachments/assets/c6404d68-1cf8-408e-9f8c-7cb274b0673c)
+> ![image](https://github.com/user-attachments/assets/c6404d68-1cf8-408e-9f8c-7cb274b0673c)
 
 <br>
 
@@ -34,6 +34,7 @@
   <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=HTML5&logoColor=white">
   <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white">
   <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white">
+  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=Python&logoColor=white">
 </div>
 
 ### 라이브러리
