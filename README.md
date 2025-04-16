@@ -15,7 +15,6 @@
 > #### 게시판
 > ![image](https://github.com/user-attachments/assets/b4554c12-85e3-4dfc-963c-c289c7cd869c)
 
-<br>
 
 > #### 회원 가입  
 > ![image](https://github.com/user-attachments/assets/fc9911df-2e40-4192-852b-cc175d887b54)
