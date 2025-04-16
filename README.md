@@ -21,20 +21,22 @@
   <tr>
     <td>게시판</td>
     <td>
-      <p>게시글, 답변, 댓글 작성 및 추천</p>
+      <p>- 게시글, 답변, 댓글 작성 및 추천</br>
+         - 페이징, 검색, 정렬
+      </p>
     </td>
     <td>✅ 완료</td>
   </tr>
   <tr>
     <td>회원 가입</td>
-    <td><p>사용자 이름, 비밀번호 & 확인, 이메일 입력</p></td>
+    <td><p>- 사용자 이름, 비밀번호 & 확인, 이메일 입력</p></td>
     <td>✅ 완료</td>
   </tr>
   <tr>
     <td>로그인/로그아웃</td>
-    <td><p>사용자 이름 & 비밀번호 입력</br>
-            로그인 세션 유지</br>
-            로그아웃 기능
+    <td><p>- 사용자 이름 & 비밀번호 입력</br>
+            - 로그인 세션 유지</br>
+            - 로그아웃 기능
         </p></td>
     <td>
       ✅ 완료
@@ -55,6 +57,10 @@
   
 > #### 로그인/로그아웃
 > ![image](https://github.com/user-attachments/assets/c6404d68-1cf8-408e-9f8c-7cb274b0673c)
+> </br>
+> </br>
+> ![image](https://github.com/user-attachments/assets/4a24c8de-3c1e-4eec-8078-e51b243b568f)
+
 
 <br>
 
