@@ -12,6 +12,29 @@
 
 ## 🔧 주요 기능
 
+<table>
+  <tr>
+    <th>페이지</th>
+    <th>기능</th>
+  </tr>
+  <tr>
+    <td>게시판</td>
+    <td>
+      <a></a> 
+    </td>
+  </tr>
+  <tr>
+    <td>회원 가입</td>
+    <td><a></a> </td>
+  </tr>
+  <tr>
+    <td>로그인/로그아웃</td>
+    <td><a></a> </td>
+  </tr>
+  
+</table>
+
+
 > #### 게시판
 > ![image](https://github.com/user-attachments/assets/b4554c12-85e3-4dfc-963c-c289c7cd869c)
 
