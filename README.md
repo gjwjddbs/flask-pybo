@@ -50,7 +50,9 @@
 > #### 게시판
 > ![image](https://github.com/user-attachments/assets/b4554c12-85e3-4dfc-963c-c289c7cd869c)
 
-
+> ### 답변 & 댓글
+> ![image](https://github.com/user-attachments/assets/ba5577f9-ebcd-405e-aa11-d02405f6dda7)
+ 
 > #### 회원 가입  
 > ![image](https://github.com/user-attachments/assets/fc9911df-2e40-4192-852b-cc175d887b54)
 
